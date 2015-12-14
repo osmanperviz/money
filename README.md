@@ -1,2 +1,0 @@
-# money
-Simple Money gem
