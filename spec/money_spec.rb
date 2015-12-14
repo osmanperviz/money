@@ -70,7 +70,7 @@ describe Money do
         end
      end
 
-      context 'when you count two different currencies' do
+      context 'when you count two different currencies (EUR - DOLAR)' do
         it 'return new Money instance' do
           expect(money + dolar).to  be_an_instance_of(Money)
         end
@@ -84,7 +84,29 @@ describe Money do
 
   end
   describe '#-' do
+    context 'when subtract the same two currencies' do
+      it 'return new Money instance' do
+        expect(money - another_eur).to  be_an_instance_of(Money)
+      end
+      it 'return correct currency' do
+        expect((money - another_eur).currency).to eq('EUR')
+      end
+      it 'return correct amaunt' do
+        expect((money - another_eur).amount).to eq(30)
+      end
+    end
 
+    context 'when subtract two different currencies(DOLAR - EUR)' do
+      it 'return new Money instance' do
+        expect(dolar - money).to  be_an_instance_of(Money)
+      end
+      it 'return correct currency' do
+        expect((dolar - money).currency).to eq('USD')
+      end
+      it 'return correct amaunt' do
+        expect((dolar - money).amount).to eq(35.5)
+      end
+    end
   end
 
 end

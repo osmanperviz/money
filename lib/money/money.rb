@@ -7,7 +7,7 @@ class Money
   end
 
   def inspect
-    return "#{@amount} #{@currency}"
+  "#{@amount} #{@currency}"
   end
 
   def self.conversion_rates(curensy,options={})
@@ -23,6 +23,11 @@ class Money
   def + (anOther)
     check_currency?(anOther)
     self.class.new((@amount + anOther.amount),@currency)
+  end
+
+  def - (anOther)
+    check_currency?(anOther)
+    self.class.new((@amount - anOther.amount).abs,@currency)
   end
 
 
