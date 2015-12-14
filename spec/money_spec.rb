@@ -1,13 +1,12 @@
 require 'spec_helper'
 
 describe Money do
-  it 'has a version number' do
-    expect(Money::VERSION).not_to be nil
-  end
 
   let(:money){Money.new(50,'EUR')}
   let(:dolar){Money.new(20,'USD')}
   let(:another_eur){Money.new(20,'EUR')}
+
+
   describe 'attributes' do
 
     it 'allows reading and writing for :currency' do
@@ -105,6 +104,44 @@ describe Money do
       end
       it 'return correct amaunt' do
         expect((dolar - money).amount).to eq(35.5)
+      end
+    end
+  end
+
+  describe '#/' do
+    context 'when devide with ordinary number' do
+      it 'return new Money instance' do
+        expect(money / 2).to  be_an_instance_of(Money)
+      end
+      it 'return correct currency' do
+        expect((money / 2).currency).to eq('EUR')
+      end
+      it 'return correct amaunt' do
+        expect((money / 3 ).amount).to eq(16.0)
+      end
+    end
+
+    context 'when devide with the same currency' do
+      it 'return new Money instance' do
+        expect(money / another_eur).to  be_an_instance_of(Money)
+      end
+      it 'return correct currency' do
+        expect((money / another_eur).currency).to eq('EUR')
+      end
+      it 'return correct amaunt' do
+        expect((money / another_eur).amount).to eq(2.0)
+      end
+    end
+
+    context 'when devide with different currency' do
+      it 'return new Money instance' do
+        expect(money / dolar).to  be_an_instance_of(Money)
+      end
+      it 'return correct currency' do
+        expect((money / dolar).currency).to eq('EUR')
+      end
+      it 'return correct amaunt' do
+        expect((money / dolar).amount).to eq(2.77)
       end
     end
   end

@@ -30,6 +30,14 @@ class Money
     self.class.new((@amount - anOther.amount).abs,@currency)
   end
 
+  def / (anOther)
+    if anOther.instance_of? Money
+      check_currency?(anOther)
+    end
+    sum = anOther.is_a?(Money) ? (@amount / anOther.amount).round(2) : (@amount / anOther).round(2)
+    self.class.new(sum,@currency)
+  end
+
 
   private
 
