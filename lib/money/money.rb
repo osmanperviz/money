@@ -6,6 +6,10 @@ class Money
     @currency = currency
   end
 
+  def inspect
+    return "#{@amaunt} #{@currency}"
+  end
+
   def self.conversion_rates(curensy,options={})
     self.class_variable_set(:@@conversion_rates,curensy=>options )
   end

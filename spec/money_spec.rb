@@ -5,8 +5,8 @@ describe Money do
     expect(Money::VERSION).not_to be nil
   end
 
+  let(:money){Money.new(50,'EUR')}
   describe 'attributes' do
-    let(:money){Money.new(50,'EUR')}
 
     it 'allows reading and writing for :currency' do
       expect(money.currency).to eq('EUR')
@@ -47,7 +47,11 @@ describe Money do
         expect{money.convert_to('usa')}.to raise_error(ArgumentError, 'Not allowed currency')
       end
     end
+  end
 
-
+  describe '#inspect' do
+    it 'return amaunt + curency string' do
+      expect(money.inspect).to eq('50 EUR')
+    end
   end
 end
