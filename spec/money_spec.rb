@@ -144,6 +144,68 @@ describe Money do
         expect((money / dolar).amount).to eq(2.77)
       end
     end
+
   end
+
+  describe '#=' do
+    context 'when checking the equality of the same two currencies' do
+      it 'return false on unequal currency' do
+        expect(money == Money.new(52,'EUR')).to  be_falsey
+      end
+      it 'return true on equal currency' do
+        expect(money == Money.new(50,'EUR')).to  be_truthy
+      end
+    end
+
+    context 'when checking the equality of different currencies' do
+      it 'return false on unequal currency' do
+        expect(money == dolar).to  be_falsey
+      end
+      it 'return true on equal currency' do
+        expect(money == Money.new(55.5,'USD')).to  be_truthy
+      end
+    end
+  end
+
+  describe '#>' do
+    context 'When checking the value of a currency versus other values same currency' do
+      it 'returns true if compared with the second value is greater' do
+        expect(money > Money.new(49,'EUR')).to  be_truthy
+      end
+      it 'returns false if compared with the second value is smaller' do
+        expect(money > Money.new(55,'EUR')).to  be_falsey
+      end
+    end
+
+    context 'When checking the value of a currency versus other values different currency' do
+      it 'returns true if compared with the second value is greater' do
+        expect(money > Money.new(20,'USD')).to  be_truthy
+      end
+      it 'returns false if compared with the second value is smaller' do
+        expect(money > Money.new(57,'USD')).to  be_falsey
+      end
+    end
+  end
+
+  describe '#<' do
+    context 'When checking the value of a currency versus other values same currency' do
+      it 'returns true if compared with the second value is smaller' do
+        expect(money < Money.new(55,'EUR')).to  be_truthy
+      end
+      it 'returns false if compared with the second value is greater' do
+        expect(money < Money.new(49,'EUR')).to  be_falsey
+      end
+    end
+
+    context 'When checking the value of a currency versus other values different currency' do
+      it 'returns true if compared with the second value is smaller' do
+        expect(money < Money.new(69,'USD')).to  be_truthy
+      end
+      it 'returns false if compared with the second value is greater' do
+        expect(money < Money.new(49,'USD')).to  be_falsey
+      end
+    end
+  end
+
 
 end
