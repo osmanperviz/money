@@ -26,13 +26,28 @@ describe Money do
   end
 
   describe '#convert_to' do
-    let(:money){Money.new(50,'EUR')}
     Money.conversion_rates('EUR',{'USD'=> 1.10,'Bitcoin'=> 0.0047})
+    let(:money){Money.new(50,'EUR')}
 
-    context 'when convert valid currency' do
-      it 'allows convertion to another  currensy' do
+    context 'when convert to valid currency' do
+      it 'allows convertion to another  currency' do
         expect(money.convert_to('USD')).to be_an_instance_of(Money)
       end
+      it 'return converted currency' do
+        expect(money.convert_to('USD').currency).to eq('USD')
+      end
+      it 'return converted amaunt' do
+        expect(money.convert_to('USD').amaunt).to eq(55)
+      end
+
     end
+
+    context 'when convert to invalid currency' do
+      it 'raise ArgumentError if currency not valid' do
+        expect{money.convert_to('usa')}.to raise_error(ArgumentError, 'Not allowed currency')
+      end
+    end
+
+
   end
 end

@@ -10,4 +10,10 @@ class Money
     self.class_variable_set(:@@conversion_rates,curensy=>options )
   end
 
+  def convert_to(currency)
+    raise ArgumentError,"Not allowed currency" if @@conversion_rates[@currency].nil? || @@conversion_rates[@currency][currency].nil?
+    converted_value = (@amaunt * @@conversion_rates[@currency][currency]).round(1)
+    self.class.new(converted_value,currency)
+  end
+
 end
