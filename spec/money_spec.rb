@@ -22,14 +22,11 @@ describe Money do
   describe '.conversion_rates' do
      it 'allows to set coversion rates' do
        Money.conversion_rates('EUR',{'USD'=> 1.11,'Bitcoin'=> 0.0047})
-       expect(Money.class_variable_get(:@@conversion_rates)).to eq({"EUR"=>{"USD"=>1.11, "Bitcoin"=>0.0047}})
+       expect(Money.conversion_rate).to eq({"EUR"=>{"USD"=>1.11, "Bitcoin"=>0.0047}})
      end
   end
 
   describe '#convert_to' do
-    Money.conversion_rates('EUR',{'USD'=> 1.10,'Bitcoin'=> 0.0047})
-    # let(:money){Money.new(50,'EUR')}
-
     context 'when convert to valid currency' do
       it 'allows convertion to another  currency' do
         expect(money.convert_to('USD')).to be_an_instance_of(Money)
