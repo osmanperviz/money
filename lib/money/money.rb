@@ -1,13 +1,13 @@
 class Money
-  attr_accessor :currency,:amaunt
+  attr_accessor :currency,:amount
 
-  def initialize(amaunt,currency )
-    @amaunt = amaunt
+  def initialize(amount,currency )
+    @amount = amount
     @currency = currency
   end
 
   def inspect
-    return "#{@amaunt} #{@currency}"
+    return "#{@amount} #{@currency}"
   end
 
   def self.conversion_rates(curensy,options={})
@@ -16,8 +16,26 @@ class Money
 
   def convert_to(currency)
     raise ArgumentError,"Not allowed currency" if @@conversion_rates[@currency].nil? || @@conversion_rates[@currency][currency].nil?
-    converted_value = (@amaunt * @@conversion_rates[@currency][currency]).round(1)
+    converted_value = (@amount * @@conversion_rates[@currency][currency]).round(1)
     self.class.new(converted_value,currency)
+  end
+
+  def + (anOther)
+    check_currency?(anOther)
+    self.class.new((@amount + anOther.amount),@currency)
+  end
+
+
+  private
+
+  def check_currency?(anOther)
+    unless @currency == anOther.currency
+      if @@conversion_rates.keys.include? @currency
+        anOther.amount = (anOther.amount / @@conversion_rates[@currency][anOther.currency]).round(2)
+      else
+        anOther.amount = (anOther.amount * @@conversion_rates[anOther.currency][@currency]).round(2)
+      end
+    end
   end
 
 end
