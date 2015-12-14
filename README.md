@@ -22,11 +22,12 @@ Or install it yourself as:
 
 
 ## Development
-
+```ruby
 The development version  can be installed with:
-$ git clone git://github.com/RubyMoney/money.git
-$ cd money
-$ rake install
+git clone git://github.com/RubyMoney/money.git
+cd money
+rake install
+ ```
 
 ## Usage
 ```ruby
