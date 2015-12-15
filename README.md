@@ -31,6 +31,13 @@ rake install
 
 ## Usage
 ```ruby
+ Configure the currency rates with respect to a base currency (here EUR):
+
+Money.conversion_rates('EUR', {
+  'USD'     => 1.11,
+  'Bitcoin' => 0.0047
+})
+
 fifty_eur = Money.new(50, "EUR")
 fifty_eur.amaount    #=> 50
 fifty_eur.currency  #=> "USD"
