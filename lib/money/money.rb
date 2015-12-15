@@ -62,6 +62,7 @@ class Money
   private
 
   def check_currency?(another)
+    return ArgumentError.new('Currency rates are not present') if self.class.conversion_rate.nil?
     unless @currency == another.currency
       if conversion_rate.keys.include? @currency
         another.amount = (another.amount / conversion_rate[@currency][another.currency]).round(2)
