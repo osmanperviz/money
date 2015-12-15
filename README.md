@@ -9,7 +9,7 @@ TODO: Delete this and the text above, and describe your gem
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'money'
+gem 'money',:git =>'git://github.com/osmanperviz/money.git'
 ```
 
 And then execute:
@@ -22,8 +22,8 @@ Or install it yourself as:
 
 
 ## Development
-```ruby
 The development version  can be installed with:
+```ruby
 git clone git://github.com/RubyMoney/money.git
 cd money
 rake install
