@@ -100,7 +100,19 @@ describe Money do
         expect((dolar - money).currency).to eq('USD')
       end
       it 'return correct amaunt' do
-        expect((dolar - money).amount).to eq(35.5)
+        expect((dolar - money).amount).to eq(-35.5)
+      end
+    end
+
+    context 'when subtract smaller amaunt from a larger amaunt same currency' do
+      it 'return new Money instance' do
+        expect(another_eur - money).to  be_an_instance_of(Money)
+      end
+      it 'return correct currency' do
+        expect((another_eur - money).currency).to eq('EUR')
+      end
+      it 'return correct amaunt' do
+        expect((another_eur - money).amount).to eq(-30)
       end
     end
   end
