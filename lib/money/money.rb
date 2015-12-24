@@ -31,7 +31,7 @@ class Money
 
   def - (another)
     check_currency?(another)
-    self.class.new((@amount - another.amount).abs,@currency)
+    self.class.new((@amount - another.amount),@currency)
   end
 
   def / (another)
